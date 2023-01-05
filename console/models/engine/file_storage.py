@@ -18,3 +18,15 @@ class FileStorage():
             for key, value in FileStorage.__objects.items():
                 new_dict[key] = value.to_dict()
             json.dump(new_dict, file)
+
+    def reload(self):
+        try:
+            with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
+                new_obj = json.load(file)
+                for key in new_obj.values():
+                    name = key["__class__"]
+                    del key[__class__]
+                    FileStorage.new(eval(name)(**new_obj))
+
+        except FileNotFoundError:
+            return

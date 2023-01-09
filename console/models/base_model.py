@@ -9,9 +9,10 @@ import models
 
 class BaseModel():
     def __init__(self, *args, **kwargs):
-        if (kwargs):
+        if kwargs:
             for key, value in kwargs.items():
-                if key == "created_at" or "updated_at":
+                #print(value)
+                if key == "created_at" or key == "updated_at":
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key == "__class__":
                     continue

@@ -6,7 +6,6 @@ class HBNBCommand(cmd.Cmd):
     """This is the class definition for the command interpreter"""
     prompt = "(hbnb) "
 
-
     def do_quit(self, line):
         """This command quits the command interpreter"""
         return True
@@ -27,6 +26,15 @@ class HBNBCommand(cmd.Cmd):
         """Does nothing"""
         pass
 
+    def do_create(self, line):
+        """Creates an instance"""
+        args = shlex.split(line)
+        if len(args) == 0:
+            print("Class name missing!")
+            return False
+        if args[0] not in classes:
+            print("class does not exist!")
+            
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

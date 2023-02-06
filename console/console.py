@@ -28,9 +28,9 @@ class HBNBCommand(cmd.Cmd):
         """This gives more information about the quit command"""
         print("This is the end of file\n")
 
-    def emptyline(self):
+    # def emptyline(self):
         """Does nothing"""
-        pass
+        # pass
 
     def do_create(self, line):
         """Creates an instance"""
@@ -63,6 +63,28 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
             return False
         print(models.storage.all()[model])
+
+    def do_destroy(self, line):
+        """Deletes an instance based on the class name and id"""
+        args = shlex.split(line)
+        if len(args) == 0:
+            print('** class name missing **')
+            return False
+        if args[0] not in classes:
+            print("** class doesn't exist  **")
+            return False
+        if len(args) == 1:
+            print('** instance id missing **')
+            return False
+        model = args[0] + "." + args[1]
+        models.storage.all()
+        if model not in models.storage.all():
+            print('** no instance found **')
+            return False
+        else:
+            del models.storage.all()[model]
+
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

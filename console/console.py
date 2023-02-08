@@ -2,6 +2,7 @@
 import cmd
 import shlex
 from models.base_model import BaseModel
+from models.user import User
 from models.engine.file_storage import classes
 import models
 from models import storage

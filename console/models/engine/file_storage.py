@@ -9,8 +9,13 @@ class FileStorage():
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
-        return FileStorage.__objects
+    def all(self, cls=None):
+        if (cls is None):
+            return FileStorage.__objects
+        new_dict = {}
+        for key, value in FileStorage.__objects.items():
+            if value.__class__ == cls:
+                new_dict[key] = value
     def new(self, obj):
         key = obj.__class__.__name__ + "." + obj.id
         FileStorage.__objects[key] = obj
